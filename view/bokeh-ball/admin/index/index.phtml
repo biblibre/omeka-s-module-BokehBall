@@ -1,0 +1,15 @@
+<?php
+$form->prepare();
+$escapeHtml = $this->plugin('escapeHtml');
+?>
+
+<?php echo $this->pageTitle($this->translate('Update property with bokeh bounce feature'), 1, $this->translate('BokehBall')); ?>
+
+<?php echo $this->form()->openTag($form); ?>
+<fieldset id='page-actions'>
+    <button type="submit"><?php echo $this->translate('Update'); ?></button>
+</fieldset>
+<?php echo $this->formCollection($form, false); ?>
+
+<?php echo $this->form()->closeTag($form); ?>
+
