@@ -55,7 +55,7 @@ class IndexController extends AbstractActionController
         $job = $dispatcher->dispatch('BokehBall\Job\UpdateJob', $args);
 
         $message = new Message(
-            'Exporting in background (%sjob #%d%s)', // @translate
+            'Updating properties in background (%sjob #%d%s)', // @translate
             sprintf(
                 '<a href="%s">',
                 htmlspecialchars($this->url()->fromRoute('admin/id', ['controller' => 'job', 'id' => $job->getId()]))

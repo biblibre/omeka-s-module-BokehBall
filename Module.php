@@ -3,14 +3,11 @@
 namespace BokehBall;
 
 use Omeka\Module\AbstractModule;
-use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\Controller\AbstractController;
 use Laminas\Mvc\MvcEvent;
-use Laminas\EventManager\Event;
 use Laminas\ServiceManager\ServiceLocatorInterface;
 use Laminas\View\Renderer\PhpRenderer;
 use BokehBall\Form\ConfigForm;
-use BokehBall\Form\SiteSettingsFieldset;
 
 class Module extends AbstractModule
 {
@@ -65,39 +62,5 @@ class Module extends AbstractModule
         $settings->set('bokehball_bokeh_bounce_label', $formData['bokehball_bokeh_bounce_label']);
 
         return true;
-    }
-
-    public function onSiteSettingsFormAddElements(Event $event)
-    {
-        $services = $this->getServiceLocator();
-        $forms = $services->get('FormElementManager');
-        $siteSettings = $services->get('Omeka\Settings\Site');
-
-        $fieldset = $forms->get(SiteSettingsFieldset::class);
-        $fieldset->populateValues([
-            'bokehball_bokeh_bounce_feature' => $siteSettings->get('bokehball_bokeh_bounce_feature', 0),
-        ]);
-
-        $form = $event->getTarget();
-
-        $groups = $form->getOption('element_groups');
-        if (isset($groups)) {
-            $groups['bokehball'] = $fieldset->getLabel();
-            $form->setOption('element_groups', $groups);
-            foreach ($fieldset->getElements() as $element) {
-                $form->add($element);
-            }
-        } else {
-            $form->add($fieldset);
-        }
-    }
-
-    public function attachListeners(SharedEventManagerInterface $sharedEventManager)
-    {
-        $sharedEventManager->attach(
-            \Omeka\Form\SiteSettingsForm::class,
-            'form.add_elements',
-            [$this, 'onSiteSettingsFormAddElements']
-        );
     }
 }

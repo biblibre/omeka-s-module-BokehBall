@@ -79,9 +79,9 @@ class UpdateJob extends AbstractJob
                     $resourceValues->add($newValue);
                     $records[] = $resource;
                 }
-
-                $em->flush();
             }
+
+            $em->flush();
             $logger->info(sprintf('%d resource(s) updated', count($records)));
             foreach ($records as $record) {
                 $em->detach($record);

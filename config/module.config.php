@@ -6,7 +6,7 @@ return [
     'form_elements' => [
         'invokables' => [
             'BokehBall\Form\ConfigForm' => Form\ConfigForm::class,
-            'BokahBall\Form\UpdatePropertyForm' => Form\UpdatePropertyForm::class,
+            'BokehBall\Form\UpdatePropertyForm' => Form\UpdatePropertyForm::class,
         ],
     ],
     'resource_page_block_layouts' => [
